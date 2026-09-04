@@ -107,5 +107,20 @@ function renderGreenPeppers() {
   });
 }
 // Iteration 2: Add click event listener on `<button class="btn btn-sauce">`
+function renderWhiteSauce() {
+  if (state.whiteSauce) {
+    document.querySelector('.sauce').classList.add('sauce-white');
+  } else {
+    document.querySelector('.sauce').classList.remove('sauce-white');
+  }
+}
+function renderGlutenFreeCrust() {
+  if (state.glutenFreeCrust) {
+    document.querySelector('.crust').classList.add('crust-gluten-free');
+  } else {
+    document.querySelector('.crust').classList.remove('crust-gluten-free');
+  }
+}
+
 
 // Iteration 2: Add click event listener on `<button class="btn btn-crust">`
