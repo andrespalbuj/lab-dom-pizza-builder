@@ -107,20 +107,82 @@ function renderGreenPeppers() {
   });
 }
 // Iteration 2: Add click event listener on `<button class="btn btn-sauce">`
+
+document.querySelector('.btn.btn-sauce').addEventListener('click', function () {
+  state.whiteSauce = !state.whiteSauce;
+  renderEverything();
+});
+
 function renderWhiteSauce() {
+  const sauce = document.querySelector('.sauce');
   if (state.whiteSauce) {
-    document.querySelector('.sauce').classList.add('sauce-white');
+    sauce.classList.add('sauce-white');
   } else {
-    document.querySelector('.sauce').classList.remove('sauce-white');
+    sauce.classList.remove('sauce-white');
   }
 }
+
+document.querySelector('.btn.btn-crust').addEventListener('click', function () {
+  state.glutenFreeCrust = !state.glutenFreeCrust;
+  renderEverything();
+});
+
 function renderGlutenFreeCrust() {
+  const crust = document.querySelector('.crust');
   if (state.glutenFreeCrust) {
-    document.querySelector('.crust').classList.add('crust-gluten-free');
+    crust.classList.add('crust-gluten-free');
   } else {
-    document.querySelector('.crust').classList.remove('crust-gluten-free');
+    crust.classList.remove('crust-gluten-free');
   }
 }
 
+function renderButtons() {
+  if (state.pepperoni) {
+    document.querySelector('.btn.btn-pepperoni').classList.add('active');
+  } else {
+    document.querySelector('.btn.btn-pepperoni').classList.remove('active');
+  }
 
-// Iteration 2: Add click event listener on `<button class="btn btn-crust">`
+  if (state.mushrooms) {
+    document.querySelector('.btn.btn-mushrooms').classList.add('active');
+  } else {
+    document.querySelector('.btn.btn-mushrooms').classList.remove('active');
+  }
+
+  if (state.greenPeppers) {
+    document.querySelector('.btn.btn-green-peppers').classList.add('active');
+  } else {
+    document.querySelector('.btn.btn-green-peppers').classList.remove('active');
+  }
+
+  if (state.whiteSauce) {
+    document.querySelector('.btn.btn-sauce').classList.add('active');
+  } else {
+    document.querySelector('.btn.btn-sauce').classList.remove('active');
+  }
+
+  if (state.glutenFreeCrust) {
+    document.querySelector('.btn.btn-crust').classList.add('active');
+  } else {
+    document.querySelector('.btn.btn-crust').classList.remove('active');
+  }
+}
+
+function renderPrice() {
+  let totalPrice = basePrice;
+  const priceList = document.querySelector('.panel.price ul');
+  const totalPriceElement = document.querySelector('.panel.price strong');
+  priceList.innerHTML = '';
+
+  for (const ingredient in ingredients) {
+    if (state[ingredient]) {
+      totalPrice += ingredients[ingredient].price;
+      const listItem = document.createElement('li');
+      listItem.textContent = `$${ingredients[ingredient].price} ${ingredients[ingredient].name}`;
+      priceList.appendChild(listItem);
+    }
+  }
+
+  document.querySelector('.panel.price strong').textContent = `$${totalPrice}`;
+} 
+
